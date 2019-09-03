@@ -25,3 +25,4 @@ class AmazonProduct(scrapy.Item):
     more_product_links = scrapy.Field()
     time = scrapy.Field()
     url = scrapy.Field()
+    lightning_deal = scrapy.Field()
