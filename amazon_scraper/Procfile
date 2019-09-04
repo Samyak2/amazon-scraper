@@ -1,0 +1,1 @@
+scrapeworker: scrapy crawl amazon_spider -o output.json

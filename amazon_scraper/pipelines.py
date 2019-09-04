@@ -42,6 +42,9 @@ class AmazonScraperPipeline(object):
     def __init__(self):
         pass
     def process_item(self, item, spider):
+        # item.setdefault("", "N/A")
+        # item.setdefault("", "N/A")
+
         with session_scope() as s:
             product = Amazon_Product(name=item["name"],
                                     price=value_if_not_na(item["price"]),
@@ -54,7 +57,22 @@ class AmazonScraperPipeline(object):
                                     answered_qs=value_if_not_na(item["answered_qs"]),
                                     availibility=value_if_not_na(item["availibility"]),
                                     time=value_if_not_na(item["time"]),
-                                    more_product_links=dumps((item["more_product_links"])))
+                                    more_product_links=dumps((item["more_product_links"])),
+                                    lightning_deal=value_if_not_na(item["lightning_deal"]),
+                                    deal_price=value_if_not_na(item["deal_price"]),
+                                    ASIN=value_if_not_na(item["ASIN"]),
+                                    brand=value_if_not_na(item["brand"]),
+                                    return_policy=value_if_not_na(item["return_policy"]),
+                                    warranty=value_if_not_na(item["warranty"]),
+                                    pay_on_delivery=value_if_not_na(item["pay_on_delivery"]),
+                                    amazon_delivered=value_if_not_na(item["amazon_delivered"]),
+                                    cart_count=value_if_not_na(item["cart_count"]),
+                                    features=value_if_not_na(item["features"]),
+                                    num_offers=value_if_not_na(item["num_offers"]),
+                                    lowest_price=value_if_not_na(item["lowest_price"]),
+                                    weight=value_if_not_na(item["weight"]),
+                                    model=value_if_not_na(item["model"]),
+                                    url=value_if_not_na(item["url"]),)
             for category in item["categories"]:
                 temp = s.query(Category).filter(Category.name==category).first()
                 if temp is None:

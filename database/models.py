@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date, DateTime, Numeric, PickleType, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, DateTime, Numeric, PickleType, ForeignKey, Boolean
 from sqlalchemy.dialects.postgresql import MONEY
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Table
@@ -16,6 +16,7 @@ class Amazon_Product(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     price = Column(Numeric)
+    url = Column(String)
     seller_name = Column(String)
     seller_rating = Column(Numeric)
     num_seller_ratings = Column(Integer)
@@ -27,6 +28,20 @@ class Amazon_Product(Base):
     categories = relationship("Category", secondary=association_table, back_populates="products", cascade="all,delete",)
     more_product_links = Column(PickleType)
     time = Column(DateTime(timezone=True))
+    lightning_deal = Column(Boolean)
+    deal_price = Column(Numeric)
+    ASIN = Column(String)
+    brand = Column(String)
+    return_policy = Column(String)
+    warranty = Column(String)
+    pay_on_delivery = Column(String)
+    amazon_delivered = Column(String)
+    cart_count = Column(Integer)
+    features = Column(String)
+    num_offers = Column(String)
+    lowest_price = Column(Numeric)
+    weight = Column(String)
+    model = Column(String)
 
 class Category(Base):
     __tablename__ = "category"
