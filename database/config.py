@@ -4,4 +4,4 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-DATABASE_URI = 'postgres+psycopg2://{}'.format(os.environ["DATABASE_URI"])
+DATABASE_URI = 'postgres+psycopg2://{}'.format(os.environ["DATABASE_URL"][11:])
