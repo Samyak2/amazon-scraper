@@ -42,6 +42,7 @@ class Amazon_Product(Base):
     lowest_price = Column(Numeric)
     weight = Column(String)
     model = Column(String)
+    category = Column(String)
 
 class Category(Base):
     __tablename__ = "category"

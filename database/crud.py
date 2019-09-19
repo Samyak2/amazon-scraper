@@ -7,37 +7,57 @@ from pytz import timezone
 from decimal import Decimal
 from pickle import dumps
 from sqlalchemy.sql.expression import null
+from sqlalchemy import Column, String
 
 india = timezone("Asia/Kolkata")
 
 engine = create_engine(DATABASE_URI)
 Session = sessionmaker(bind=engine)
+s = Session()
 
-def recreate_database():
-    Base.metadata.drop_all(engine)
-    # for table in reversed(Base.metadata.sorted_tables):
-    #     table.drop(engine)
-    # Category.drop(engine)
-    # Amazon_Product(engine)
-    Base.metadata.create_all(engine)
+# def add_column(engine, table_name, column):
+#     column_name = column.compile(dialect=engine.dialect)
+#     column_type = column.type.compile(engine.dialect)
+#     engine.execute('ALTER TABLE %s ADD COLUMN %s %s' % (table_name, column_name, column_type))
 
-# s = Session()
+# category = Column(String, name="category")
+# add_column(engine, "amazon_products", category)
 
-from contextlib import contextmanager
+temp = s.query(Amazon_Product).all()
+for product in temp:
+    # print(product.name, ":", ",".join([cat.name for cat in product.categories]))
+# product = temp
+    setattr(product, "category", ",".join([cat.name for cat in product.categories]))
+    # s.add(product)
+    # product.category = ",".join([cat.name for cat in product.categories])
+    # s.add(product)
+s.commit()
+s.close()
+# def recreate_database():
+#     Base.metadata.drop_all(engine)
+#     # for table in reversed(Base.metadata.sorted_tables):
+#     #     table.drop(engine)
+#     # Category.drop(engine)
+#     # Amazon_Product(engine)
+#     Base.metadata.create_all(engine)
 
-@contextmanager
-def session_scope():
-    session = Session()
-    try:
-        yield session
-        session.commit()
-    except Exception:
-        session.rollback()
-        raise
-    finally:
-        session.close()
+# # s = Session()
 
-recreate_database()
+# from contextlib import contextmanager
+
+# @contextmanager
+# def session_scope():
+#     session = Session()
+#     try:
+#         yield session
+#         session.commit()
+#     except Exception:
+#         session.rollback()
+#         raise
+#     finally:
+#         session.close()
+
+# recreate_database()
 
 # with session_scope() as s:
 #     time = datetime.now(india)

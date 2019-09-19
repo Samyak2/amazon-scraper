@@ -72,13 +72,14 @@ class AmazonScraperPipeline(object):
                                     lowest_price=value_if_not_na(item["lowest_price"]),
                                     weight=value_if_not_na(item["weight"]),
                                     model=value_if_not_na(item["model"]),
-                                    url=value_if_not_na(item["url"]),)
-            for category in item["categories"]:
-                temp = s.query(Category).filter(Category.name==category).first()
-                if temp is None:
-                    temp = Category(name=category)
-                    s.add(temp)
-                product.categories.append(temp)
+                                    url=value_if_not_na(item["url"]),
+                                    category=value_if_not_na(",".join(item["categories"])),)
+            # for category in item["categories"]:
+            #     temp = s.query(Category).filter(Category.name==category).first()
+            #     if temp is None:
+            #         temp = Category(name=category)
+            #         s.add(temp)
+            #     product.categories.append(temp)
             s.add(product)
             s.commit()
         return item
