@@ -1,3 +1,7 @@
+## Archived: This project is not being maintained anymore
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 # Amazon India Scraper
 
 ## Description
