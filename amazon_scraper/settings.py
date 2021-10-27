@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'amazon_scraper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'amazon_scraper_3 (+your@email.here)'#"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36"#'amazon_scraper_2 (+samyak201@gmail.com)'
+USER_AGENT = 'amazon_scraper_3 (+your@email.here)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
